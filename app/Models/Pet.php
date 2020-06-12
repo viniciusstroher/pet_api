@@ -3,12 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App;
 
 class Pet extends Model
 {
-	use SoftDeletes;
+	use \Illuminate\Database\Eloquent\SoftDeletes;
+    
     protected $fillable = ['name','race'];
     // protected $casts = ['created_at' => 'datetime:Y-m-d','updated_at' => 'datetime:Y-m-d'];
 
@@ -16,4 +16,10 @@ class Pet extends Model
         return $this->hasMany(MedicalConsultation::class, 'pet_id', 'id');
     }
 
+    public static function boot()
+    {
+	    Pet::deleted(function($pet) {
+		    $pet->attendances()->delete();
+		});
+	}
 }

@@ -20,6 +20,9 @@ class PetController extends Controller
         return App\Pet::with('attendances')->get();
     }
 
+    public function filter(Request $request){
+        return App\Pet::with('attendances')->paginate(1);
+    }
     /**
      * Show the form for creating a new resource.
      *

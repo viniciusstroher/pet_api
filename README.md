@@ -1,6 +1,7 @@
 laravel new pet_api
 composer require --dev phpunit/phpunit
 vendor\bin\phpunit
+composer require askedio/laravel-soft-cascade
 
 composer require fzaninotto/faker
 composer require laravel/passport
