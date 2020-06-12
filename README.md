@@ -1,6 +1,6 @@
 # PET API!
 ## Instalar Ambiente
-### Requisitos\
+### Requisitos \
 #####	[x] PHP 7+
 #####	[x] Composer
 #####	[x] Mysql / Mariadb 10+
