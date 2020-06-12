@@ -22,7 +22,7 @@ class PetControllerTest extends TestCase
         // $email = $this->faker->safeEmail;
 
         $response = $this->post('/v1/pets', []);
-        var_dump($response->decodeResponseJson());
+        // var_dump($response->decodeResponseJson());
         // $response->assertStatus(204);
 
         // $newsletter->shouldHaveReceived('subscribe', [$email, ['name' => $name]]);

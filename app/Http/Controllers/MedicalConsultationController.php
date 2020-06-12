@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\MedicalConversationRequest;
+use App\Http\Requests\MedicalConsultationRequest;
 use Illuminate\Support\Facades\DB;
 
 use App;
@@ -18,7 +18,7 @@ class MedicalConsultationController extends Controller
     public function index()
     {
         //
-        return App\MedicalConversation::with('pet')->get();
+        return App\MedicalConsultation::with('pet')->get();
     }
 
     /**
@@ -37,12 +37,12 @@ class MedicalConsultationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MedicalConversationRequest $request)
+    public function store(MedicalConsultationRequest $request)
     {
         //
         \DB::beginTransaction();
         try {
-            $mc = App\MedicalConversation::create($request->all());
+            $mc = App\MedicalConsultation::create($request->all());
             \DB::commit();
 
             return response()->json($mc, 201);
@@ -62,7 +62,7 @@ class MedicalConsultationController extends Controller
     public function show($id)
     {
         //
-        $mc = App\MedicalConversation::with('pet')->find($id);
+        $mc = App\MedicalConsultation::with('pet')->find($id);
         if($mc !== null){
             return response()->json($mc, 200);
         }
@@ -87,17 +87,20 @@ class MedicalConsultationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MedicalConversationRequest $request, $id)
+    public function update(MedicalConsultation $request, $id)
     {
         //
         try {
           
-            $mc = App\MedicalConversation::find($id);
-            $mc->fill($request->all())->save();
-            \DB::commit();
+            $mc = App\MedicalConsultation::find($id);
+            if($mc !== null){
+                $mc->fill($request->all())->save();
+                \DB::commit();
 
-            return response()->json($mc, 200);
-          
+                return response()->json($mc, 200);
+            }
+
+            return response()->json($pet, 404);
         } catch (\Exception $e) {
             \DB::rollback();
             return response()->json(null, 500);
@@ -113,7 +116,7 @@ class MedicalConsultationController extends Controller
     public function destroy($id)
     {
         //
-        $mc = App\MedicalConversation::find($id);
+        $mc = App\MedicalConsultation::find($id);
         if($mc !== null){
             $mc->delete();
             response()->json(null, 204);

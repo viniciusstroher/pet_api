@@ -94,11 +94,14 @@ class PetController extends Controller
         try {
           
             $pet = App\Pet::find($id);
-            $pet->fill($request->all())->save();
-            \DB::commit();
+            if($pet !== null){
+                $pet->fill($request->all())->save();
+                \DB::commit();
 
-            return response()->json($pet, 200);
-          
+                return response()->json($pet, 200);
+            }
+            
+            return response()->json($pet, 404);
         } catch (\Exception $e) {
             \DB::rollback();
             return response()->json(null, 500);

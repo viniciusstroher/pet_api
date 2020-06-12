@@ -15,8 +15,9 @@ class MedicalConversationControllerTest extends TestCase
      */
     public function testExample()
     {
-        $response = $this->get('/');
-
+        // $response = $this->get('/');
+        $response = $this->get('/v1/medical_consultation', []);
+        var_dump($response->decodeResponseJson());
         $response->assertStatus(200);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MedicalConversationRequest extends FormRequest
+class MedicalConsultationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +26,7 @@ class MedicalConversationRequest extends FormRequest
         return [
             //
             'pet_id' => ['required'],
+            'attendance_at' => ['required','date_format:Y-m-d']
         ];
     }
 }
