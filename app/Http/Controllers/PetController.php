@@ -14,15 +14,16 @@ class PetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        if($request->has('filter')){
+            $search = $request->get('filter');
+            return App\Pet::with('attendances')->where('name','like', "%{$search}%")->paginate(10);
+        }
         return App\Pet::with('attendances')->paginate(10);
     }
 
-    // public function filter(Request $request){
-    //     return App\Pet::with('attendances')->paginate(1);
-    // }
     /**
      * Show the form for creating a new resource.
      *
