@@ -40,9 +40,12 @@ class AppServiceProvider extends ServiceProvider
             //create db mysql
             try {
                 $dbh = new PDO("mysql:host=$host", Config::get('database.connections.mysql.username'), Config::get('database.connections.mysql.password'));
+                
+                $createDatabaseQuery = 'CREATE DATABASE IF NOT EXISTS `' . Config::get('database.connections.mysql.database') . '`;';
+                
+                // print $createDatabaseQuery."\n";
 
-                $dbh->exec('CREATE SCHEMA `' . Config::get('database.connections.mysql.database') . '` DEFAULT CHARACTER SET utf8;') 
-                or die(print_r($dbh->errorInfo(), true));
+                $dbh->exec($createDatabaseQuery);
 
             } catch (PDOException $e) {
                 die("DB ERROR: " . $e->getMessage());

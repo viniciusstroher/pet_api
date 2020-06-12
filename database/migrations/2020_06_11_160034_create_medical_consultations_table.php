@@ -20,7 +20,7 @@ class CreateMedicalConsultationsTable extends Migration
             $table->foreign('pet_id')->references('id')->on('pets')->onDelete('cascade');
 
             $table->timestamps();
-            $table->timestamp('attendance_at');
+            $table->timestamp('attendance_at')->nullable();
             $table->softDeletes();
         });
     }
