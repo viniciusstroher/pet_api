@@ -18,7 +18,7 @@ class MedicalConsultationController extends Controller
     public function index()
     {
         //
-        return App\MedicalConsultation::with('pet')->get();
+        return App\MedicalConsultation::with('pet')->paginate(10);
     }
 
     /**

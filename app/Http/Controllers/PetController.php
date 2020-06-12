@@ -17,12 +17,12 @@ class PetController extends Controller
     public function index()
     {
         //
-        return App\Pet::with('attendances')->get();
+        return App\Pet::with('attendances')->paginate(10);
     }
 
-    public function filter(Request $request){
-        return App\Pet::with('attendances')->paginate(1);
-    }
+    // public function filter(Request $request){
+    //     return App\Pet::with('attendances')->paginate(1);
+    // }
     /**
      * Show the form for creating a new resource.
      *
