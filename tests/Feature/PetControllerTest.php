@@ -21,7 +21,7 @@ class PetControllerTest extends TestCase
         // $name = $this->faker->name;
         // $email = $this->faker->safeEmail;
 
-        $response = $this->post('/v1/pet', []);
+        $response = $this->post('/v1/pets', []);
         var_dump($response->decodeResponseJson());
         // $response->assertStatus(204);
 

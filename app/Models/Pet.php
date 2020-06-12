@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App;
 
 class Pet extends Model
 {
@@ -15,9 +16,7 @@ class Pet extends Model
     ];
 
     function attendances() {
-        return $this->hasMany('App\MedicalConsultantion', 'id', 'pet_id');
+        return $this->hasMany(MedicalConsultation::class, 'id', 'pet_id');
     }
 
-
-   
 }

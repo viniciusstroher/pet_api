@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 use App\Http\Requests\PetRequest;
 use App;
 
@@ -18,7 +17,7 @@ class PetController extends Controller
     public function index()
     {
         //
-        return App\Pet::All();
+        return App\Pet::with('attendances')->get();
     }
 
     /**
@@ -63,7 +62,7 @@ class PetController extends Controller
     public function show($id)
     {
         //
-        $pet = App\Pet::find($id);
+        $pet = App\Pet::with('attendances')->find($id);
         if($pet !== null){
             return response()->json($pet, 200);
         }
@@ -116,7 +115,10 @@ class PetController extends Controller
     {
         //
         $pet = App\Pet::find($id);
-        $pet->delete();
-        response()->json(null, 204);
+        if($pet !== null){
+            $pet->delete();
+            response()->json(null, 204);
+        }
+        response()->json(null, 404);
     }
 }

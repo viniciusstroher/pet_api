@@ -18,6 +18,7 @@ class MedicalConsultationController extends Controller
     public function index()
     {
         //
+        return App\MedicalConversation::with('pet')->get();
     }
 
     /**
@@ -39,7 +40,17 @@ class MedicalConsultationController extends Controller
     public function store(MedicalConversationRequest $request)
     {
         //
-        
+        \DB::beginTransaction();
+        try {
+            $mc = App\MedicalConversation::create($request->all());
+            \DB::commit();
+
+            return response()->json($mc, 201);
+
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(null, 500);
+        }
     }
 
     /**
@@ -51,6 +62,11 @@ class MedicalConsultationController extends Controller
     public function show($id)
     {
         //
+        $mc = App\MedicalConversation::with('pet')->find($id);
+        if($mc !== null){
+            return response()->json($mc, 200);
+        }
+        return response()->json(null, 200);
     }
 
     /**
@@ -74,6 +90,18 @@ class MedicalConsultationController extends Controller
     public function update(MedicalConversationRequest $request, $id)
     {
         //
+        try {
+          
+            $mc = App\MedicalConversation::find($id);
+            $mc->fill($request->all())->save();
+            \DB::commit();
+
+            return response()->json($mc, 200);
+          
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(null, 500);
+        }
     }
 
     /**
@@ -85,6 +113,12 @@ class MedicalConsultationController extends Controller
     public function destroy($id)
     {
         //
+        $mc = App\MedicalConversation::find($id);
+        if($mc !== null){
+            $mc->delete();
+            response()->json(null, 204);
+        }
+        response()->json(null, 404);
 
     }
 }

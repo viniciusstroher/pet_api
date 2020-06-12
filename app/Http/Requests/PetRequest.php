@@ -23,9 +23,23 @@ class PetRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => ['required','min:2','unique:pets'],
-            'race' => ['required','max:1']
-        ];
+        switch($this->method())
+        {
+        
+            case 'POST':
+                return [
+                    'name' => ['required','min:2','unique:pets'],
+                    'race' => ['required','max:1',"in:g,G,c,C"]
+                ];
+                break;
+
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'name' => ['required','min:2'],
+                    'race' => ['required','max:1',"in:g,G,c,C"]
+                ];
+                break;
+        }
     }
 }
