@@ -17,8 +17,11 @@ class CreateMedicalConsultationsTable extends Migration
             $table->id();
             $table->text('description');
             $table->unsignedBigInteger('pet_id')->nullable();
-            $table->foreign('pet_id')->references('id')->on('pets');
+            $table->foreign('pet_id')->references('id')->on('pets')->onDelete('cascade');
+
             $table->timestamps();
+            $table->timestamp('attendance_at');
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ class CreatePetsTable extends Migration
             $table->string('race',1);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
