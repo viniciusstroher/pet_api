@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Config;
 
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,8 +35,9 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
-         if (Config::get('database.default') === 'mysql') {
+        if (Config::get('database.default') === 'mysql') {
             //create db mysql
+            DB::getConnection()->statement('CREATE DATABASE :schema', ['schema' => Config::get('database.connections.mysql.database')]);
         }
     }
 }
