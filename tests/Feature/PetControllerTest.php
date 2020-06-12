@@ -16,17 +16,7 @@ class PetControllerTest extends TestCase
     public function testV1ValidatePetRequestCreate()
     {
         $response = $this->get('/');
-
-
-        // $name = $this->faker->name;
-        // $email = $this->faker->safeEmail;
-
-        $response = $this->post('/v1/pets', []);
-        // var_dump($response->decodeResponseJson());
-        // $response->assertStatus(204);
-
-        // $newsletter->shouldHaveReceived('subscribe', [$email, ['name' => $name]]);
-
-        // $response->assertStatus(200);
+        $response = $this->post('/v1/pets', ['name'=>'Bolinha','race'=>'C']);
+        $response->assertStatus(200);
     }
 }

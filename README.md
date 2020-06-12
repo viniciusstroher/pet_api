@@ -1,3 +1,4 @@
+
 laravel new pet_api
 composer require --dev phpunit/phpunit
 vendor\bin\phpunit
@@ -24,3 +25,6 @@ php artisan passport:install
 php artisan test
 
 php artisan serve
+
+
+#Instalar Ambiente
