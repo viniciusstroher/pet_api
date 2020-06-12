@@ -35,9 +35,12 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
-        // if (Config::get('database.default') === 'mysql') {
-        //     //create db mysql
-        //     DB::getConnection()->statement('CREATE DATABASE :schema', ['schema' => Config::get('database.connections.mysql.database')]);
-        // }
+        if (Config::get('database.default') === 'mysql') {
+            //var_dump( Config::get('database'),Db::connection());exit;
+            //create db mysql
+
+            $newDatabase = strtolower(Config::get('database.connections.mysql.database'));
+            DB::statement("CREATE DATABASE {$newDatabase}");
+        }
     }
 }
