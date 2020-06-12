@@ -16,6 +16,7 @@ class Pet extends Model
         return $this->hasMany(MedicalConsultation::class, 'pet_id', 'id');
     }
 
+    //soft cascade delete usando os eventos do laravel
     public static function boot()
     {
 	    Pet::deleted(function($pet) {
