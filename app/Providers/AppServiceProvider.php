@@ -33,5 +33,9 @@ class AppServiceProvider extends ServiceProvider
                 touch($path);
             }
         }
+
+         if (Config::get('database.default') === 'mysql') {
+            //create db mysql
+        }
     }
 }
