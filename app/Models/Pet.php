@@ -13,7 +13,7 @@ class Pet extends Model
     // protected $casts = ['created_at' => 'datetime:Y-m-d','updated_at' => 'datetime:Y-m-d'];
 
     function attendances() {
-        return $this->hasMany(MedicalConsultation::class, 'id', 'pet_id');
+        return $this->hasMany(MedicalConsultation::class, 'pet_id', 'id');
     }
 
 }

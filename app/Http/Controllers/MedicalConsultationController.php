@@ -87,7 +87,7 @@ class MedicalConsultationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MedicalConsultation $request, $id)
+    public function update(MedicalConsultationRequest $request, $id)
     {
         //
         try {
