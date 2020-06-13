@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
             //var_dump( Config::get('database'),Db::connection());exit;
             //create db mysql
             try {
-                $dbh = new PDO("mysql:host=$host", Config::get('database.connections.mysql.username'), Config::get('database.connections.mysql.password'));
+                $dbh = new PDO("mysql:host=".Config::get('database.connections.mysql.host'), Config::get('database.connections.mysql.username'), Config::get('database.connections.mysql.password'));
                 
                 $createDatabaseQuery = 'CREATE DATABASE IF NOT EXISTS `' . Config::get('database.connections.mysql.database') . '`;';
                 
